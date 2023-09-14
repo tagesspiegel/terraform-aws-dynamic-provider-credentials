@@ -1,70 +1,68 @@
-# terraform-module-template
+# Terraform AWS dynamic provider credentials
 
-A template repository to provide a basic setup for Terraform modules.
+This module creates a dynamic credentials setup between AWS and Terraform Cloud (project). It creates an IAM policy, IAM role, and IAM role policy attachment. It also creates a Terraform Cloud variable set with the AWS configurations. For more information on dynamic provider credentials, see [Dynamic Provider Credentials](https://developer.hashicorp.com/terraform/cloud-docs/workspaces/dynamic-provider-credentials).
 
-## Module structure
+## Usage
 
-The module structure is based on the [Terraform module documentation](https://www.terraform.io/docs/modules/index.html#standard-module-structure). The following tree shows the structure of the module.
+```terraform
+// one-time credentials to setup the dynamic credentials
+// this is the only time you need to provide credentials
+// after this, the dynamic credentials will be used.
+// If the setup was successful, `access_key` and `secret_key` should be removed.
+provider "aws" {
+  region     = var.aws_region
+  access_key = var.access_key
+  secret_key = var.secret_key
+}
 
-```txt
-├── .gitignore
-├── LICENSE
-├── README.md
-├── docs
-│ └── README.md
-├── examples
-│ ├── complete
-│ │ ├── main.tf
-│ │ ├── outputs.tf
-│ │ ├── variables.tf
-│ │ └── versions.tf
-│ ├── minimal
-│ │ ├── main.tf
-│ │ ├── outputs.tf
-│ │ ├── variables.tf
-│ │ └── versions.tf
-├── main.tf
-├── outputs.tf
-├── variables.tf
-└── versions.tf
+module "aws_dynamic_provider_credentials" {
+  source  = "tagesspiegel/dynamic-provider-credentials/aws"
+  version = "1.0.0"
+
+  tfc_organization = "my-org"
+  tfc_project      = "my-project"
+
+  tfc_workspaces = [{
+    name_override = "my-project-auth"
+    workspace     = "*"
+    run_phase     = "*"
+    policies = [
+      {
+        Effect = "Allow"
+        Action = [
+          "ec2:*"
+        ]
+        Resource = "*"
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "ram:*"
+        ]
+        Resource = "*"
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "cloudwatch:*"
+        ]
+        Resource = "*"
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "logs:*"
+        ]
+        Resource = "*"
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "kms:*"
+        ]
+        Resource = "*"
+      }
+    ]
+  }]
+}
 ```
-
-## Working with this template
-
-In order to use this template, you can use the GitHub template feature. This will create a new repository based on this template. After that, you can clone the repository and start working on it.
-
-### Creating a new repository based on this template
-
-To get started with this template, you have to navigate https://github.com/new and select the Tagesspiegel organization. After that, you can select the `terraform-module-template` repository, enter a name for your new repository and click on `Create repository`. Please note that you have to define a name for your new repository that is not already taken and follows the naming conventions (`terraform-<provider>-<name>`).
-
-![Create GitHub repository based on template](docs/github_create_repository.png)
-
-If everything worked as expected, you should now have a new repository based on this template. You can now clone the repository and start working on it.
-
-<!-- BEGIN_TF_DOCS -->
-## Requirements
-
-| Name | Version |
-|------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.5.6 |
-
-## Providers
-
-No providers.
-
-## Modules
-
-No modules.
-
-## Resources
-
-No resources.
-
-## Inputs
-
-No inputs.
-
-## Outputs
-
-No outputs.
-<!-- END_TF_DOCS -->
