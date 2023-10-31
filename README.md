@@ -72,7 +72,7 @@ module "aws_dynamic_provider_credentials" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.5.6 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.6 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.3.0 |
 
 ## Providers
