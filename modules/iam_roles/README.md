@@ -3,13 +3,13 @@
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.3.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.32 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.3.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.32.1 |
 
 ## Modules
 

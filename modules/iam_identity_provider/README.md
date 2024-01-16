@@ -3,15 +3,15 @@
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.3.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.32 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.3.0 |
-| <a name="provider_random"></a> [random](#provider\_random) | 3.5.1 |
-| <a name="provider_tls"></a> [tls](#provider\_tls) | 4.0.4 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.32.1 |
+| <a name="provider_random"></a> [random](#provider\_random) | 3.6.0 |
+| <a name="provider_tls"></a> [tls](#provider\_tls) | 4.0.5 |
 
 ## Modules
 
