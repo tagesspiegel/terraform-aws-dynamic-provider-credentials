@@ -73,13 +73,13 @@ module "aws_dynamic_provider_credentials" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.6 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.32 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.59 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_tfe"></a> [tfe](#provider\_tfe) | 0.51.1 |
+| <a name="provider_tfe"></a> [tfe](#provider\_tfe) | 0.57.0 |
 
 ## Modules
 
@@ -102,11 +102,11 @@ module "aws_dynamic_provider_credentials" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_statements"></a> [statements](#input\_statements) | The list of statements to use for the trust relationship | <pre>set(object({<br>    org_name     = string<br>    project_name = string<br>    workspace    = string<br>    run_phase    = string<br>  }))</pre> | n/a | yes |
 | <a name="input_tfc_aws_audience"></a> [tfc\_aws\_audience](#input\_tfc\_aws\_audience) | AWS audience | `string` | `"aws.workload.identity"` | no |
 | <a name="input_tfc_hostname"></a> [tfc\_hostname](#input\_tfc\_hostname) | The hostname of the TFC or TFE instance you'd like to use with AWS | `string` | `"app.terraform.io"` | no |
 | <a name="input_tfc_organization"></a> [tfc\_organization](#input\_tfc\_organization) | Name of the organization | `string` | n/a | yes |
 | <a name="input_tfc_project"></a> [tfc\_project](#input\_tfc\_project) | Name of the terraform cloud/enterprise project | `string` | n/a | yes |
-| <a name="input_tfc_workspaces"></a> [tfc\_workspaces](#input\_tfc\_workspaces) | List of workspaces to create IAM roles for | <pre>list(object({<br>    name_override = string<br>    workspace     = string<br>    run_phase     = string<br>    policies = list(object({<br>      Effect   = string<br>      Action   = list(string)<br>      Resource = string<br>    }))<br>  }))</pre> | n/a | yes |
 
 ## Outputs
 
