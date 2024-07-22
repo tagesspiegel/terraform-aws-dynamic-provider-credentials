@@ -7,6 +7,11 @@ variable "tfc_organization" {
   description = "Name of the organization"
 }
 
+variable "tfc_project" {
+  type        = string
+  description = "Name of the terraform cloud/enterprise project"
+}
+
 variable "tfc_aws_audience" {
   type        = string
   description = "AWS audience"
@@ -23,21 +28,17 @@ variable "tfc_hostname" {
 // dynamic credentials roles
 //
 
-variable "tfc_workspaces" {
-  type = list(object({
-    name_override = string
-    workspace     = string
-    run_phase     = string
-    policies = list(object({
-      Effect   = string
-      Action   = list(string)
-      Resource = string
-    }))
+variable "statements" {
+  type = set(object({
+    org_name     = string
+    project_name = string
+    workspace    = string
+    run_phase    = string
   }))
-  description = "List of workspaces to create IAM roles for"
+  description = "The list of statements to use for the trust relationship"
+  validation {
+    condition     = length(var.statements) > 0
+    error_message = "At least one statement must be provided"
+  }
 }
 
-variable "tfc_project" {
-  type        = string
-  description = "Name of the terraform cloud/enterprise project"
-}
