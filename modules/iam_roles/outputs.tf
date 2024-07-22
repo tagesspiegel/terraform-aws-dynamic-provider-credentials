@@ -1,6 +1,6 @@
 output "full_name" {
   description = "A combination of project and workspace name"
-  value       = local.full_name
+  value       = var.aws_iam_role_name_override
 }
 
 output "openid_claims" {

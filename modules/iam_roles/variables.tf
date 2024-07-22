@@ -1,6 +1,6 @@
 variable "aws_iam_role_name_override" {
   type        = string
-  default     = ""
+  default     = "terraform-cloud-dynamic-credentials"
   description = "The name of the IAM role to create. If not set, the name will be generated automatically."
 }
 
@@ -20,26 +20,20 @@ variable "tfc_hostname" {
   description = "The hostname of the TFC or TFE instance you'd like to use with AWS"
 }
 
-variable "tfc_organization_name" {
-  type        = string
-  default     = "Tagesspiegel"
-  description = "The name of the TFC or TFE organization you'd like to use with AWS"
-}
+// role statement configuration
 
-variable "tfc_project_name" {
-  type        = string
-  description = "The name of the TFC or TFE project you'd like to use with AWS"
-}
-
-variable "tfc_workspace_name" {
-  type        = string
-  description = "The name of the TFC or TFE workspace you'd like to use with AWS"
-}
-
-variable "tfc_run_phase" {
-  type        = string
-  description = "The run phase to use for the trust relationship"
-  default     = "*"
+variable "statements" {
+  type = set(object({
+    org_name     = string
+    project_name = string
+    workspace    = string
+    run_phase    = string
+  }))
+  description = "The list of statements to use for the trust relationship"
+  validation {
+    condition     = length(var.statements) > 0
+    error_message = "At least one statement must be provided"
+  }
 }
 
 variable "aws_iam_custom_policies" {
