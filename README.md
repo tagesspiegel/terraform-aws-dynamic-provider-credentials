@@ -102,7 +102,6 @@ module "aws_dynamic_provider_credentials" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_tfc_aws_audience"></a> [tfc\_aws\_audience](#input\_tfc\_aws\_audience) | AWS audience | `string` | `"aws.workload.identity"` | no |
 | <a name="input_tfc_hostname"></a> [tfc\_hostname](#input\_tfc\_hostname) | The hostname of the TFC or TFE instance you'd like to use with AWS | `string` | `"app.terraform.io"` | no |
 | <a name="input_tfc_organization"></a> [tfc\_organization](#input\_tfc\_organization) | Name of the organization | `string` | n/a | yes |
 | <a name="input_tfc_project"></a> [tfc\_project](#input\_tfc\_project) | Name of the terraform cloud/enterprise project | `string` | n/a | yes |
@@ -112,7 +111,6 @@ module "aws_dynamic_provider_credentials" {
 
 | Name | Description |
 |------|-------------|
-| <a name="output_aws_tfc_audience"></a> [aws\_tfc\_audience](#output\_aws\_tfc\_audience) | n/a |
 | <a name="output_full_names"></a> [full\_names](#output\_full\_names) | A list of all 'full\_name' values |
 | <a name="output_oidc_claims"></a> [oidc\_claims](#output\_oidc\_claims) | A map of 'full\_name' as key and 'openid\_claims' as value |
 | <a name="output_role_arns"></a> [role\_arns](#output\_role\_arns) | A map of 'full\_name' as key and 'role\_arn' as value |

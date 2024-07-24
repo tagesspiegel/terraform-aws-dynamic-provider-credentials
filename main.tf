@@ -3,7 +3,6 @@
 module "aws_identity_provider" {
   source           = "./modules/iam_identity_provider"
   tfc_organization = var.tfc_organization
-  tfc_aws_audience = var.tfc_aws_audience
   tfc_hostname     = var.tfc_hostname
 }
 

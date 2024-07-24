@@ -7,12 +7,6 @@ variable "tfc_organization" {
   description = "Name of the organization"
 }
 
-variable "tfc_aws_audience" {
-  type        = string
-  description = "AWS audience"
-  default     = "aws.workload.identity"
-}
-
 variable "tfc_hostname" {
   type        = string
   default     = "app.terraform.io"
