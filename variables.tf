@@ -13,12 +13,6 @@ variable "tfc_aws_audience" {
   default     = "aws.workload.identity"
 }
 
-variable "tfc_hostname" {
-  type        = string
-  default     = "app.terraform.io"
-  description = "The hostname of the TFC or TFE instance you'd like to use with AWS"
-}
-
 //
 // dynamic credentials roles
 //

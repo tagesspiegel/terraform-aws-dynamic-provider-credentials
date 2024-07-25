@@ -14,12 +14,6 @@ variable "tfc_oidc_provider_client_id_list" {
   description = "The list of client IDs to use for TFC"
 }
 
-variable "tfc_hostname" {
-  type        = string
-  default     = "app.terraform.io"
-  description = "The hostname of the TFC or TFE instance you'd like to use with AWS"
-}
-
 variable "tfc_organization_name" {
   type        = string
   default     = "Tagesspiegel"

@@ -1,6 +1,6 @@
 // get tls certificate from tfc
 data "tls_certificate" "tfc_certificate" {
-  url = "https://${var.tfc_hostname}"
+  url = "https://app.terraform.io"
 }
 
 // generate two random strings to use as audience

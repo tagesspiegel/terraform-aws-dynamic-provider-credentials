@@ -18,10 +18,10 @@ resource "aws_iam_role" "this" {
      "Action": "sts:AssumeRoleWithWebIdentity",
      "Condition": {
        "StringEquals": {
-         "${var.tfc_hostname}:aud": "${one(var.tfc_oidc_provider_client_id_list)}"
+         "app.terraform.io:aud": "${one(var.tfc_oidc_provider_client_id_list)}"
        },
        "StringLike": {
-         "${var.tfc_hostname}:sub": "organization:${var.tfc_organization_name}:project:${var.tfc_project_name}:workspace:${var.tfc_workspace_name}:run_phase:${var.tfc_run_phase}"
+         "app.terraform.io:sub": "organization:${var.tfc_organization_name}:project:${var.tfc_project_name}:workspace:${var.tfc_workspace_name}:run_phase:${var.tfc_run_phase}"
        }
      }
    }

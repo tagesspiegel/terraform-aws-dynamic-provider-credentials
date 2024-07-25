@@ -31,7 +31,6 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_tfc_aws_audience"></a> [tfc\_aws\_audience](#input\_tfc\_aws\_audience) | The audience value to use in run identity tokens | `string` | `"aws.workload.identity"` | no |
-| <a name="input_tfc_hostname"></a> [tfc\_hostname](#input\_tfc\_hostname) | The hostname of the TFC or TFE instance you'd like to use with AWS | `string` | `"app.terraform.io"` | no |
 | <a name="input_tfc_organization"></a> [tfc\_organization](#input\_tfc\_organization) | The name of the TFC or TFE organization you'd like to use with AWS | `string` | n/a | yes |
 
 ## Outputs
