@@ -1,16 +1,16 @@
-output "full_names" {
-  value       = [for instance in module.aws_tfc_dynamic_credentials_iam_roles : instance.full_name]
+output "full_name" {
+  value       = module.aws_tfc_dynamic_credentials_iam_roles.full_name
   description = "A list of all 'full_name' values"
 }
 
 output "oidc_claims" {
-  value       = { for instance in module.aws_tfc_dynamic_credentials_iam_roles : instance.full_name => instance.openid_claims }
-  description = "A map of 'full_name' as key and 'openid_claims' as value"
+  value       = module.aws_tfc_dynamic_credentials_iam_roles.openid_claims
+  description = "OpenID Claims for trust relationship"
 }
 
 output "role_arns" {
-  value       = { for instance in module.aws_tfc_dynamic_credentials_iam_roles : instance.full_name => instance.role_arn }
-  description = "A map of 'full_name' as key and 'role_arn' as value"
+  value       = module.aws_tfc_dynamic_credentials_iam_roles.role_arn
+  description = "ARN for trust relationship role"
 }
 
 output "aws_tfc_audience" {
