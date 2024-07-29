@@ -15,13 +15,13 @@ module "aws_tfc_dynamic_credentials_iam_roles" {
     module.aws_identity_provider
   ]
 
-  aws_iam_role_name_override       = each.value.name_override
+  aws_iam_role_name_override       = var.dynamic_credentials_role_name_override
   tfc_oidc_provider_arn            = module.aws_identity_provider.aws_oidc_tfc_provider_arn
   tfc_oidc_provider_client_id_list = module.aws_identity_provider.aws_oidc_tfc_provider_client_id_list
   tfc_hostname                     = var.tfc_hostname
 
   statements              = var.statements
-  aws_iam_custom_policies = each.value.policies
+  aws_iam_custom_policies = var.policies
 }
 
 // create a variable set

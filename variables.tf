@@ -28,6 +28,12 @@ variable "tfc_hostname" {
 // dynamic credentials roles
 //
 
+variable "dynamic_credentials_role_name_override" {
+  type        = string
+  default     = "terraform-cloud-dynamic-credentials"
+  description = "The name of the IAM role to create. If not set, the name will be generated automatically."
+}
+
 variable "statements" {
   type = set(object({
     org_name     = string
@@ -42,3 +48,20 @@ variable "statements" {
   }
 }
 
+variable "policies" {
+  type = set(object({
+    Effect   = string
+    Action   = list(string)
+    Resource = string
+  }))
+  default = [
+    {
+      Effect = "Allow"
+      Action = [
+        "ec2:*"
+      ]
+      Resource = "*"
+    }
+  ]
+  description = "A list of custom policies to attach to the IAM role. By default the provider will be allowed to perform all actions on all ec2 resources."
+}
