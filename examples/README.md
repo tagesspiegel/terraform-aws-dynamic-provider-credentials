@@ -30,5 +30,10 @@ No resources.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_aws_tfc_audience"></a> [aws\_tfc\_audience](#output\_aws\_tfc\_audience) | n/a |
+| <a name="output_full_name"></a> [full\_name](#output\_full\_name) | n/a |
+| <a name="output_oidc_claims"></a> [oidc\_claims](#output\_oidc\_claims) | n/a |
+| <a name="output_role_arns"></a> [role\_arns](#output\_role\_arns) | n/a |
 <!-- END_TF_DOCS -->
