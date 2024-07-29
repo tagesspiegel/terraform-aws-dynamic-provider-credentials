@@ -115,7 +115,7 @@ module "aws_dynamic_provider_credentials" {
 | Name | Description |
 |------|-------------|
 | <a name="output_aws_tfc_audience"></a> [aws\_tfc\_audience](#output\_aws\_tfc\_audience) | n/a |
-| <a name="output_full_names"></a> [full\_names](#output\_full\_names) | A list of all 'full\_name' values |
-| <a name="output_oidc_claims"></a> [oidc\_claims](#output\_oidc\_claims) | A map of 'full\_name' as key and 'openid\_claims' as value |
-| <a name="output_role_arns"></a> [role\_arns](#output\_role\_arns) | A map of 'full\_name' as key and 'role\_arn' as value |
+| <a name="output_full_name"></a> [full\_name](#output\_full\_name) | A list of all 'full\_name' values |
+| <a name="output_oidc_claims"></a> [oidc\_claims](#output\_oidc\_claims) | OpenID Claims for trust relationship |
+| <a name="output_role_arns"></a> [role\_arns](#output\_role\_arns) | ARN for trust relationship role |
 <!-- END_TF_DOCS -->
