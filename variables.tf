@@ -7,6 +7,11 @@ variable "tfc_organization" {
   description = "Name of the organization"
 }
 
+variable "tfc_project" {
+  type        = string
+  description = "Name of the terraform cloud/enterprise project"
+}
+
 variable "tfc_aws_audience" {
   type        = string
   description = "AWS audience"
@@ -23,21 +28,32 @@ variable "tfc_hostname" {
 // dynamic credentials roles
 //
 
-variable "tfc_workspaces" {
-  type = list(object({
-    name_override = string
-    workspace     = string
-    run_phase     = string
-    policies = list(object({
-      Effect   = string
-      Action   = list(string)
-      Resource = string
-    }))
-  }))
-  description = "List of workspaces to create IAM roles for"
+variable "dynamic_credentials_role_name_override" {
+  type        = string
+  default     = "terraform-cloud-dynamic-credentials"
+  description = "The name of the IAM role to create. If not set, the name will be generated automatically."
 }
 
-variable "tfc_project" {
-  type        = string
-  description = "Name of the terraform cloud/enterprise project"
+variable "statements" {
+  type = set(object({
+    org_name     = string
+    project_name = string
+    workspace    = string
+    run_phase    = optional(string, "*")
+  }))
+  description = "The list of statements to use for the trust relationship"
+  validation {
+    condition     = length(var.statements) > 0
+    error_message = "At least one statement must be provided"
+  }
+}
+
+variable "policies" {
+  type = set(object({
+    Effect   = string
+    Action   = set(string)
+    Resource = string
+  }))
+  default     = []
+  description = "A list of custom policies to attach to the IAM role. By default the provider will be allowed to perform all actions on all ec2 resources."
 }

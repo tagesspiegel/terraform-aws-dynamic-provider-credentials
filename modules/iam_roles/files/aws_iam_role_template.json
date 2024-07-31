@@ -1,0 +1,22 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        %{ for stmt in statements ~}
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Federated": "${tfc_oidc_provider_arn}"
+            },
+            "Action": "sts:AssumeRoleWithWebIdentity",
+            "Condition": {
+                "StringEquals": {
+                    "${tfc_hostname}:aud": "${audience}"
+                },
+                "StringLike": {
+                    "${tfc_hostname}:sub": "organization:${stmt.org_name}:project:${stmt.project_name}:workspace:${stmt.workspace}:run_phase:${stmt.run_phase}"
+                }
+            }
+        }
+        %{ endfor ~}
+    ]
+}

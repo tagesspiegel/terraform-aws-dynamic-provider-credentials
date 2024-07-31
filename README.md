@@ -73,13 +73,13 @@ module "aws_dynamic_provider_credentials" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.6 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.32 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.59 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_tfe"></a> [tfe](#provider\_tfe) | 0.51.1 |
+| <a name="provider_tfe"></a> [tfe](#provider\_tfe) | 0.57.0 |
 
 ## Modules
 
@@ -102,18 +102,20 @@ module "aws_dynamic_provider_credentials" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_dynamic_credentials_role_name_override"></a> [dynamic\_credentials\_role\_name\_override](#input\_dynamic\_credentials\_role\_name\_override) | The name of the IAM role to create. If not set, the name will be generated automatically. | `string` | `"terraform-cloud-dynamic-credentials"` | no |
+| <a name="input_policies"></a> [policies](#input\_policies) | A list of custom policies to attach to the IAM role. By default the provider will be allowed to perform all actions on all ec2 resources. | <pre>set(object({<br>    Effect   = string<br>    Action   = set(string)<br>    Resource = string<br>  }))</pre> | `[]` | no |
+| <a name="input_statements"></a> [statements](#input\_statements) | The list of statements to use for the trust relationship | <pre>set(object({<br>    org_name     = string<br>    project_name = string<br>    workspace    = string<br>    run_phase    = optional(string, "*")<br>  }))</pre> | n/a | yes |
 | <a name="input_tfc_aws_audience"></a> [tfc\_aws\_audience](#input\_tfc\_aws\_audience) | AWS audience | `string` | `"aws.workload.identity"` | no |
 | <a name="input_tfc_hostname"></a> [tfc\_hostname](#input\_tfc\_hostname) | The hostname of the TFC or TFE instance you'd like to use with AWS | `string` | `"app.terraform.io"` | no |
 | <a name="input_tfc_organization"></a> [tfc\_organization](#input\_tfc\_organization) | Name of the organization | `string` | n/a | yes |
 | <a name="input_tfc_project"></a> [tfc\_project](#input\_tfc\_project) | Name of the terraform cloud/enterprise project | `string` | n/a | yes |
-| <a name="input_tfc_workspaces"></a> [tfc\_workspaces](#input\_tfc\_workspaces) | List of workspaces to create IAM roles for | <pre>list(object({<br>    name_override = string<br>    workspace     = string<br>    run_phase     = string<br>    policies = list(object({<br>      Effect   = string<br>      Action   = list(string)<br>      Resource = string<br>    }))<br>  }))</pre> | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
 | <a name="output_aws_tfc_audience"></a> [aws\_tfc\_audience](#output\_aws\_tfc\_audience) | n/a |
-| <a name="output_full_names"></a> [full\_names](#output\_full\_names) | A list of all 'full\_name' values |
-| <a name="output_oidc_claims"></a> [oidc\_claims](#output\_oidc\_claims) | A map of 'full\_name' as key and 'openid\_claims' as value |
-| <a name="output_role_arns"></a> [role\_arns](#output\_role\_arns) | A map of 'full\_name' as key and 'role\_arn' as value |
+| <a name="output_full_name"></a> [full\_name](#output\_full\_name) | A list of all 'full\_name' values |
+| <a name="output_oidc_claims"></a> [oidc\_claims](#output\_oidc\_claims) | OpenID Claims for trust relationship |
+| <a name="output_role_arns"></a> [role\_arns](#output\_role\_arns) | ARN for trust relationship role |
 <!-- END_TF_DOCS -->

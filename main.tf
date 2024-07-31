@@ -15,18 +15,13 @@ module "aws_tfc_dynamic_credentials_iam_roles" {
     module.aws_identity_provider
   ]
 
-  for_each = { for workspace in var.tfc_workspaces : "${workspace.name_override}" => workspace }
-
-  tfc_organization_name = var.tfc_organization
-  tfc_project_name      = var.tfc_project
-
+  aws_iam_role_name_override       = var.dynamic_credentials_role_name_override
   tfc_oidc_provider_arn            = module.aws_identity_provider.aws_oidc_tfc_provider_arn
   tfc_oidc_provider_client_id_list = module.aws_identity_provider.aws_oidc_tfc_provider_client_id_list
+  tfc_hostname                     = var.tfc_hostname
 
-  aws_iam_role_name_override = each.value.name_override
-  tfc_workspace_name         = each.value.workspace
-  tfc_run_phase              = each.value.run_phase
-  aws_iam_custom_policies    = each.value.policies
+  statements              = var.statements
+  aws_iam_custom_policies = var.policies
 }
 
 // create a variable set
@@ -59,7 +54,7 @@ resource "tfe_variable" "tfe_aws_provider_auth" {
 
 resource "tfe_variable" "tfe_aws_provider_auth_arn" {
   key             = "TFC_AWS_RUN_ROLE_ARN"
-  value           = module.aws_tfc_dynamic_credentials_iam_roles["${var.tfc_project}-auth"].role_arn
+  value           = module.aws_tfc_dynamic_credentials_iam_roles.role_arn
   category        = "env"
   description     = "AWS provider auth"
   variable_set_id = tfe_variable_set.tfc_aws_dynamic_credentials.id
