@@ -39,7 +39,7 @@ variable "statements" {
     org_name     = string
     project_name = string
     workspace    = string
-    run_phase    = string
+    run_phase    = optional(string, "*")
   }))
   description = "The list of statements to use for the trust relationship"
   validation {
@@ -51,17 +51,9 @@ variable "statements" {
 variable "policies" {
   type = set(object({
     Effect   = string
-    Action   = list(string)
+    Action   = set(string)
     Resource = string
   }))
-  default = [
-    {
-      Effect = "Allow"
-      Action = [
-        "ec2:*"
-      ]
-      Resource = "*"
-    }
-  ]
+  default     = []
   description = "A list of custom policies to attach to the IAM role. By default the provider will be allowed to perform all actions on all ec2 resources."
 }
